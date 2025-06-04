@@ -4,6 +4,7 @@ import circleshape
 import player
 import asteroid
 import asteroidfield
+import sys
 
 def main():
     # groups
@@ -43,6 +44,10 @@ def main():
         dt = clock.tick(60) / 1000
         # input
         updatable.update(dt)
+        for thing_a in asteroids:
+            if thing_a.collision_check(player1):
+                print("Game over!")
+                sys.exit()
         # render
         for thing in drawable:
             thing.draw(screen)
