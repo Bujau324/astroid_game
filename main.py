@@ -5,18 +5,22 @@ import player
 import asteroid
 import asteroidfield
 import sys
+import shot
 
 def main():
     # groups
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
     asteroids = pygame.sprite.Group()
+    shots = pygame.sprite.Group()
     # set both groups as containers for player
     player.Player.containers = (updatable, drawable)
     # set astroids to respective container along with other groups
     asteroid.Asteroid.containers = (asteroids, updatable, drawable)
     # set asteroidfield to updatable group
     asteroidfield.AsteroidField.containers = (updatable)
+    # set shots to respective groups
+    shot.Shot.containers = (shots, updatable, drawable)
 
     pygame.init()
     print("Starting Asteroids!")
