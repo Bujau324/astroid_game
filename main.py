@@ -55,7 +55,7 @@ def main():
                 sys.exit()
             for shott in shots:
                 if shott.collision_check(aster):
-                    aster.kill()
+                    aster.split()
                     shott.kill()
 
         # render
