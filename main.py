@@ -48,10 +48,16 @@ def main():
         dt = clock.tick(60) / 1000
         # input
         updatable.update(dt)
-        for thing_a in asteroids:
-            if thing_a.collision_check(player1):
+        # ship to asteroid collision check
+        for aster in asteroids:
+            if aster.collision_check(player1):
                 print("Game over!")
                 sys.exit()
+            for shott in shots:
+                if shott.collision_check(aster):
+                    aster.kill()
+                    shott.kill()
+
         # render
         for thing in drawable:
             thing.draw(screen)
