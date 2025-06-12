@@ -36,8 +36,9 @@ def main():
     asteroid_field1 = asteroidfield.AsteroidField()
 
 
-
-    while (True):
+    # play again?
+    retry = "Y"
+    while (retry.upper() == "Y"):
         for event in pygame.event.get():
             # allow exit from window
             if event.type == pygame.QUIT:
@@ -52,7 +53,27 @@ def main():
         for aster in asteroids:
             if aster.collision_check(player1):
                 print("Game over!")
-                sys.exit()
+                # Play again???
+                retry = input("Retry? Y/N: ")
+                if retry.upper() == "Y":
+                    # Reset player to center
+                    player1.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+                    player1.velocity = pygame.Vector2(0,0)
+
+                    # Reset player rotation
+                    player1.rotation = 0
+
+                    # Clear all existing game objects
+                    for astero in asteroids.copy():
+                        astero.kill()
+                    for sho in shots.copy():
+                        sho.kill()
+                    
+                    # Reset asteroid field spawn timer
+                    asteroid_field1.spawn_timer = -5
+                    
+                else:
+                    sys.exit()
             for shott in shots:
                 if shott.collision_check(aster):
                     aster.split()
